@@ -5,7 +5,8 @@ using namespace std;
 int main() {
 
     AlgorithmHandler handler = AlgorithmHandler();
-    handler.runAllAlgorithms();
+    //handler.runAllAlgorithms();
+    handler.runAllAlgorithmsPartially();
     
 }
 

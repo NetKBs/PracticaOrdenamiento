@@ -67,6 +67,7 @@ class AlgorithmHandler {
 
     public:
         Result results[NUM_ALGORITHMS][NUM_ARRAY_TYPES];
+        Result resultsPartial[NUM_ALGORITHMS]; // Only Unsorted Array is used
         
     private:
         Arrays arraysObjs = Arrays();
@@ -82,12 +83,7 @@ class AlgorithmHandler {
         AlgorithmHandler();
 
         void runAllAlgorithms();
-        void runSelectionSort(bool sortPartial = false);
-        void runInsertionSort(bool sortPartial = false);
-        void runBubbleSort(int arr[], int size = ARR_SIZE, bool sortPartial = false);
-        void runModifiedBubbleSort(int arr[], int size = ARR_SIZE, bool sortPartial = false);
-        void runShellSort(int arr[], int size = ARR_SIZE, bool sortPartial = false);
-        void runQuickSort(int arr[], int high = ARR_SIZE-1, int low = 0,  bool sortPartial = false);
+        void runAllAlgorithmsPartially();
 
 };
 
