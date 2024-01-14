@@ -1,6 +1,7 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 
+#include "AlgorithmHandler.h"
 #include <iostream>
 using namespace std;
 
@@ -178,5 +179,83 @@ std::pair<int, int> quickSort(int arr[], int low, int high, bool sortPartial = f
   return {swaps, comparisons};
 }
 
+/*
+
+int partitionStruct(Lista arr[], int low, int high) {
+    Lista& pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].tiempo <= pivot.tiempo) {
+            i++;
+            if (i != j) {
+                swapStruct(arr[i], arr[j]);
+            }
+        }
+    }
+    swapStruct(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void ordenamientoQuickSortStruct(Lista arr[], int low, int high) {
+    if (low < high) {
+        int pi = partitionStruct(arr, low, high);
+        ordenamientoQuickSortStruct(arr, low, pi - 1);
+        ordenamientoQuickSortStruct(arr, pi + 1, high);
+    }
+}
+
+
+*/
+
+int partitionAlternativeForDoubles(NameDouble arr[], int low, int high) {
+    NameDouble& pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].d_data <= pivot.d_data) {
+            i++;
+            if (i != j) {
+                std::swap(arr[i], arr[j]);
+            }
+        }
+    }
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+
+inline void quickSortAlternativeForDoubles(NameDouble arr[], int low, int high) {
+  if (low < high) {
+        int pi = partitionAlternativeForDoubles(arr, low, high);
+        quickSortAlternativeForDoubles(arr, low, pi - 1);
+        quickSortAlternativeForDoubles(arr, pi + 1, high);
+    }
+}
+
+int partitionAlternativeForInts(NameInt arr[], int low, int high) {
+    NameInt& pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].i_data <= pivot.i_data) {
+            i++;
+            if (i != j) {
+                std::swap(arr[i], arr[j]);
+            }
+        }
+    }
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+
+inline void quickSortAlternativeForInts(NameInt arr[], int low, int high) {
+  if (low < high) {
+        int pi = partitionAlternativeForInts(arr, low, high);
+         quickSortAlternativeForInts(arr, low, pi - 1);
+        quickSortAlternativeForInts(arr, pi + 1, high);
+    }
+}
 
 #endif

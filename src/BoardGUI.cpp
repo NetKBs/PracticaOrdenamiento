@@ -5,6 +5,60 @@
 #include <iomanip>
 #include <vector>
 
+void llenarYMostrarTablaOrdenada(const AlgorithmHandler &handler,
+                                 const std::string &tipoDato) {
+  std::cout << std::fixed
+            << std::setprecision(7); // Set precision for floating point output.
+
+  clearScreen();
+  std::string arrayType = "";
+
+  for (int i = 0; i < NUM_ARRAY_TYPES; i++) {
+
+    switch (i) {
+    case 0:
+      arrayType = "Desordenado";
+      break;
+    case 1:
+      arrayType = "Ordenado";
+      break;
+    case 2:
+      arrayType = "Invertido";
+      break;
+    }
+
+    if (tipoDato == "tiempo") {
+
+      std::cout << "Array " << arrayType << std::endl;
+      for (int j = 0; j < NUM_ALGORITHMS; ++j) {
+        std::cout << j + 1 << "-" << handler.timeResults[i][j].name << " - "
+                  << handler.timeResults[i][j].d_data << std::endl;
+      }
+      std::cout << std::endl;
+
+    } else if (tipoDato == "comparaciones") {
+
+      std::cout << "Array " << arrayType << std::endl;
+      for (int j = 0; j < NUM_ALGORITHMS; ++j) {
+        std::cout << j + 1 << "-" << handler.swapsResults[i][j].name << " - "
+                  << handler.swapsResults[i][j].i_data << std::endl;
+      }
+      std::cout << std::endl;
+
+    } else if (tipoDato == "intermcabio") {
+
+      std::cout << "Array " << arrayType << std::endl;
+      for (int j = 0; j < NUM_ALGORITHMS; ++j) {
+        std::cout << j + 1 << "-" << handler.compResults[i][j].name << " - "
+                  << handler.compResults[i][j].i_data << std::endl;
+      }
+      std::cout << std::endl;
+    }
+  }
+  std::cout << "Presiona Enter para continuar...";
+  waitForInput();
+}
+
 // Displays a table with headers and data based on the specified data type.
 void llenarYMostrarTabla(const AlgorithmHandler &handler,
                          const std::vector<std::string> &titulosFila,
@@ -12,7 +66,7 @@ void llenarYMostrarTabla(const AlgorithmHandler &handler,
                          const std::string &tipoDato) {
   std::cout << std::fixed
             << std::setprecision(7); // Set precision for floating point output.
-  
+
   clearScreen();
   // Print column headers
   std::cout << std::setw(15) << ""
@@ -51,11 +105,13 @@ void llenarYMostrarTablaParcial(const AlgorithmHandler &handler,
                                 const std::string &tipoDato) {
   std::cout << std::fixed
             << std::setprecision(7); // Set precision for floating point output.
-  
+
   clearScreen();
   // Print column headers
-  std::cout << std::setw(15) << "" << "\t";
-  std::cout << std::setw(15) << "Desordenado" << "\t";
+  std::cout << std::setw(15) << ""
+            << "\t";
+  std::cout << std::setw(15) << "Desordenado"
+            << "\t";
   std::cout << std::endl;
 
   // Print row headers and table data
@@ -97,6 +153,9 @@ void BoardGUI::mostrarMenu(const AlgorithmHandler &handler,
     std::cout << "4. Mostrar Resultados Parciales Por Tiempo\n";
     std::cout << "5. Mostrar Resultados Parciales Por Comparaciones\n";
     std::cout << "6. Mostrar Resultados Parciales Por Intercambios\n";
+    std::cout << "7. Mostrar Mejores Tiempos\n";
+    std::cout << "8. Mostrar Mejores Comparaciones\n";
+    std::cout << "9. Mostrar Mejores Intercambios\n";
     std::cout << "0. Salir\n";
     std::cout << "Seleccione una opcion: ";
     std::cin >> opcion;
@@ -108,7 +167,8 @@ void BoardGUI::mostrarMenu(const AlgorithmHandler &handler,
       break;
 
     case 2:
-      llenarYMostrarTabla(handler, titulosFila, titulosColumna, "comparaciones");
+      llenarYMostrarTabla(handler, titulosFila, titulosColumna,
+                          "comparaciones");
       break;
     case 3:
       llenarYMostrarTabla(handler, titulosFila, titulosColumna, "intercambios");
@@ -122,6 +182,13 @@ void BoardGUI::mostrarMenu(const AlgorithmHandler &handler,
     case 6:
       llenarYMostrarTablaParcial(handler, titulosColumna, "intercambios");
       break;
+    case 7:
+        llenarYMostrarTablaOrdenada(handler, "tiempo");
+        break;
+    case 8:
+        llenarYMostrarTablaOrdenada(handler, "comparaciones");
+    case 9:
+        llenarYMostrarTablaOrdenada(handler, "intercambios");
     case 0:
       std::cout << "Saliendo del programa...\n";
       break;

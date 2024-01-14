@@ -12,13 +12,13 @@ int main() {
     AlgorithmHandler handler;
     handler.runAllAlgorithms();
     handler.runAllAlgorithmsPartially();
+    handler.sortBestResults();
 
     // Definir títulos para la primera fila (en la parte superior)
     std::vector<std::string> titulosFila = {"Desordenado", "Ordenado", "Invertido"};
 
     // Definir títulos para la primera columna (en el lado izquierdo)
     std::vector<std::string> titulosColumna = {"Seleccion", "Insercion", "Burbuja", "B-Modificado", "Shell Sort", "Quick Sort"};
-    
     
     // Crear objeto BoardGUI para mostrar el menu principal
     BoardGUI GUI;

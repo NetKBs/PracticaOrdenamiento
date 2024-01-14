@@ -4,6 +4,11 @@
 #include "Arrays.h"
 #include <string>
 
+
+const int NUM_ALGORITHMS = 6;
+const int NUM_ARRAY_TYPES = 3;
+const int NUM_DATA = 3;
+
 struct Data {
     int swaps;
     int comparisons;
@@ -14,8 +19,16 @@ struct Result{
     Data data;
 };
 
-const int NUM_ALGORITHMS = 6;
-const int NUM_ARRAY_TYPES = 3;
+struct NameDouble {
+    std::string name;
+    double d_data;
+};
+
+struct NameInt {
+    std::string name;
+    int i_data;
+};
+
 
 enum Algorithms {
     SELECTION_SORT,
@@ -68,6 +81,10 @@ class AlgorithmHandler {
     public:
         Result results[NUM_ALGORITHMS][NUM_ARRAY_TYPES];
         Result resultsPartial[NUM_ALGORITHMS]; // Only Unsorted Array is used
+        // Arrays to hold the results for different array states
+        NameDouble timeResults[NUM_ARRAY_TYPES][NUM_ALGORITHMS];
+        NameInt swapsResults[NUM_ARRAY_TYPES][NUM_ALGORITHMS];
+        NameInt compResults[NUM_ARRAY_TYPES][NUM_ALGORITHMS];
         
     private:
         Arrays arraysObjs = Arrays();
@@ -84,7 +101,7 @@ class AlgorithmHandler {
 
         void runAllAlgorithms();
         void runAllAlgorithmsPartially();
-
+        void sortBestResults();
 };
 
 

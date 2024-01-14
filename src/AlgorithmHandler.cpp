@@ -2,6 +2,7 @@
 #include "algorithms.h"
 #include <chrono>
 #include <utility>
+#include <vector>
 
 AlgorithmHandler::AlgorithmHandler() {
 
@@ -49,9 +50,7 @@ void AlgorithmHandler::runAllAlgorithms() {
       std::cout << "Algoritmo " << getAlgorithmName(Algorithms(i)) << " Array "
                 << getArrayTypeName(ArraysTypes(j)) << " terminado"
                 << std::endl;
-      std::cout << "Tiempo: " << duration.count() << " Swaps: " << count.first
-                << " Comparisons: " << count.second << std::endl
-                << "" << std::endl;
+      
     }
   }
 }
@@ -91,8 +90,32 @@ void AlgorithmHandler::runAllAlgorithmsPartially() {
     resultsPartial[i].data.time = duration.count();
     std::cout << "Algoritmo " << getAlgorithmName(Algorithms(i)) << " Array UNSORTED"
               << " Parcialmente" << " terminado" << std::endl;
-    std::cout << "Tiempo: " << duration.count() << " Swaps: " << count.first
-              << " Comparisons: " << count.second << std::endl
-              << "" << std::endl;
+  
   }
+}
+
+void AlgorithmHandler::sortBestResults() {
+    
+    // Array of algorithm names for quick access based on index
+    const std::array<std::string, NUM_ALGORITHMS> algorithmNames = {
+        "Seleccion", "Insercion", "Burbuja", "B-Modificado", "Shell Sort", "Quick Sort"
+    };
+
+    // Fill the results arrays
+    for (int i = 0; i < NUM_ALGORITHMS; ++i) {
+        const std::string& name = algorithmNames[i];
+        for (int j = 0; j < NUM_ARRAY_TYPES; ++j) {
+            timeResults[j][i] = {name, results[i][j].data.time};
+            compResults[j][i] = {name, results[i][j].data.comparisons};
+            swapsResults[j][i] = {name, results[i][j].data.swaps};
+        }
+    }
+
+   // Sort
+   for (int i = 0; i < NUM_ARRAY_TYPES; i++) {
+    quickSortAlternativeForDoubles(timeResults[i], 0, 6-1);
+    quickSortAlternativeForInts(swapsResults[i], 0, 6-1);
+    quickSortAlternativeForInts(compResults[i], 0, 6-1);
+   }
+
 }
