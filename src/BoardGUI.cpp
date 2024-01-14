@@ -45,7 +45,7 @@ void llenarYMostrarTablaOrdenada(const AlgorithmHandler &handler,
       }
       std::cout << std::endl;
 
-    } else if (tipoDato == "intermcabio") {
+    } else if (tipoDato == "intercambios") {
 
       std::cout << "Array " << arrayType << std::endl;
       for (int j = 0; j < NUM_ALGORITHMS; ++j) {
@@ -154,8 +154,8 @@ void BoardGUI::mostrarMenu(const AlgorithmHandler &handler,
     std::cout << "5. Mostrar Resultados Parciales Por Comparaciones\n";
     std::cout << "6. Mostrar Resultados Parciales Por Intercambios\n";
     std::cout << "7. Mostrar Mejores Tiempos\n";
-    std::cout << "8. Mostrar Mejores Comparaciones\n";
-    std::cout << "9. Mostrar Mejores Intercambios\n";
+    std::cout << "8. Mostrar Mejores Intercambios\n";
+    std::cout << "9. Mostrar Mejores Comparaciones\n";
     std::cout << "0. Salir\n";
     std::cout << "Seleccione una opcion: ";
     std::cin >> opcion;
@@ -187,8 +187,10 @@ void BoardGUI::mostrarMenu(const AlgorithmHandler &handler,
         break;
     case 8:
         llenarYMostrarTablaOrdenada(handler, "comparaciones");
+        break;
     case 9:
         llenarYMostrarTablaOrdenada(handler, "intercambios");
+        break;
     case 0:
       std::cout << "Saliendo del programa...\n";
       break;
